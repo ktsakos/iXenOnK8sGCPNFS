@@ -1,0 +1,83 @@
+{
+	"id": "D1C19631103AD2AA9C780934FD62CE0B",
+	"type": "Sensor",
+	"context": {
+		"type": "StructuredValue",
+		"value": {
+			"City": "http://dbpedia.org/ontology/City",
+			"Float": "http://www.w3.org/2001/XMLSchema#float",
+			"Integer": "http://www.w3.org/2001/XMLSchema#int",
+			"Text": "http://www.w3.org/2001/XMLSchema#string",
+			"Sensor": "https://www.w3.org/TR/vocab-ssn/#SOSASensor",
+			"UOM": "https://www.w3.org/2005/Incubator/ssn/wiki/SensorOntology2009#UnitOfMeasurement",
+			"value": "https://www.w3.org/TR/vocab-ssn/#SOSAhasResult",
+			"location": "http://www.loa-cnr.it/ontologies/DUL.owl#hasLocation",
+			"metadata": "https://www.w3.org/2005/Incubator/ssn/wiki/SensorOntology2009#hasMetaDataInformation",
+			"Model": "https://www.w3.org/2005/Incubator/ssn/wiki/SensorOntology2009#ModelName",
+			"pressure": "https://www.semanticscholar.org/topic/Atmospheric-Pressure/40578",
+			"temperature": "https://en.wikipedia.org/wiki/Temperature",
+			"ambientLight": "https://en.wikipedia.org/wiki/Available_light",
+			"Lux": "https://el.wikipedia.org/wiki/Lux",
+			"Celsius": "http://www.ontology-of-units-of-measure.org/resource/om-2/degreeCelsius",
+			"acceleration": "https://en.wikipedia.org/wiki/Acceleration",
+			"magnetometer": "https://en.wikipedia.org/wiki/Magnetometer",
+			"rssi": "https://en.wikipedia.org/wiki/Received_signal_strength_indication",
+			"Publisher": "http://dbpedia.org/ontology/publisher",
+
+			"type": "@type",
+			"id": "@id"
+
+		},
+		"metadata": {}
+	},
+	"pressure": {
+		"type": "Number",
+		"value": 87,
+		"metadata": {
+			"UOM": {
+				"type": "Text",
+				"value": "pa"
+			}
+		}
+	},
+	"ambientLight": {
+		"type": "Number",
+		"value": 87,
+		"metadata": {
+			"UOM": {
+				"type": "Text",
+				"value": "Lux"
+			}
+		}
+	},
+	"location": {
+		"type": "geo:point",
+		"value": "41.3763726, 2.1864475",
+		"metadata": {
+			"City": {
+				"type": "Text",
+				"value": "Chania"
+			}
+		}
+	},
+	"Model": {
+		"type": "Text",
+		"value": "Proximity Beacon",
+		"metadata": {
+			"Publisher": {
+				"type": "Text",
+				"value": "Estimote"
+			}
+		}
+	},
+	"temperature": {
+		"type": "Number",
+		"value": 32,
+		"metadata": {
+			"UOM": {
+				"type": "Text",
+				"value": "Celsius"
+			}
+		}
+	}
+}
