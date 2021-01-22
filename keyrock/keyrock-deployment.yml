@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: keyrock-deployment
+    namespace: kostas
+    labels:
+        app: keyrock
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: keyrock
+    template:
+        metadata:
+            labels:
+                app: keyrock
+        spec:
+            containers:
+            - name: fiware-keyrock
+              image: fiware/idm:7.6.0
+              imagePullPolicy: IfNotPresent
+              ports:
+                - containerPort: 3005
+                - containerPort: 443
+              env:
+                - name: DEBUG
+                  valueFrom:
+                    secretKeyRef: 
+                        name: keyrock-secret
+                        key: debug
+                - name: IDM_DB_HOST
+                  valueFrom:
+                    secretKeyRef: 
+                        name: keyrock-secret
+                        key: db_host
+                - name: IDM_DB_PORT
+                  valueFrom:
+                    secretKeyRef: 
+                        name: keyrock-secret
+                        key: db_port
+                - name: IDM_HOST
+                  valueFrom:
+                    secretKeyRef: 
+                        name: keyrock-secret
+                        key: host
+                - name: IDM_PORT
+                  valueFrom:
+                    secretKeyRef: 
+                        name: keyrock-secret
+                        key: port
+                - name: IDM_DB_PASS
+                  valueFrom:
+                    secretKeyRef: 
+                        name: keyrock-secret
+                        key: db_pass
+                - name: IDM_DB_USER
+                  valueFrom:
+                    secretKeyRef: 
+                        name: keyrock-secret
+                        key: db_user
+                - name: IDM_ADMIN_USER
+                  valueFrom:
+                    secretKeyRef: 
+                        name: keyrock-secret
+                        key: admin_user
+                - name: IDM_ADMIN_EMAIL
+                  valueFrom:
+                    secretKeyRef: 
+                        name: keyrock-secret
+                        key: admin_email
+                - name: IDM_ADMIN_PASS
+                  valueFrom:
+                    secretKeyRef: 
+                        name: keyrock-secret
+                        key: admin_pass
+
+
+

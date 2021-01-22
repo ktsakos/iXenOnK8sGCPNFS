@@ -1,0 +1,13 @@
+{
+    "name": "docker_web_app",
+    "version": "1.0.0",
+    "description": "Node.js on Docker",
+    "author": "Kostas Tsakos <ktsakos@isc.tuc.gr>",
+    "main": "mongoparser.js",
+    "scripts": {
+      "start": "node mongoparser.js"
+    },
+    "dependencies": {
+      "express": "^4.16.1"
+    }
+  }

@@ -1,0 +1,29 @@
+#Στα Stateful services το αρχειο storage yaml ειναι αχρηστο
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-volume-claim
+  namespace: kostas
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-ps-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: 35.189.73.100 #ip of the nfs server
+    path: "/mnt/sharedfolder/mysql"   #Where the code is stored on the nfs server

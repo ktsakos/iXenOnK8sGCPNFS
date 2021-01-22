@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: cygnus-deployment
+    namespace: kostas
+    labels:
+        app: cygnus
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: cygnus
+    template:
+        metadata:
+            labels:
+                app: cygnus
+        spec:
+            containers:
+            - name: fiware-cygnus
+              image: fiware/cygnus-ngsi:latest
+              imagePullPolicy: IfNotPresent
+              ports:
+                - containerPort: 5080
+                - containerPort: 5051
+              env:
+                - name: CYGNUS_MONGO_HOSTS
+                  valueFrom:
+                    secretKeyRef: 
+                        name: cygnus-secret
+                        key: mongo_hosts
+                - name: CYGNUS_LOG_LEVEL
+                  valueFrom:
+                    secretKeyRef: 
+                        name: cygnus-secret
+                        key: log_level
+                - name: CYGNUS_SERVICE_PORT
+                  valueFrom:
+                    secretKeyRef: 
+                        name: cygnus-secret
+                        key: service_port
+                - name: CYGNUS_API_PORT
+                  valueFrom:
+                    secretKeyRef: 
+                        name: cygnus-secret
+                        key: api_port

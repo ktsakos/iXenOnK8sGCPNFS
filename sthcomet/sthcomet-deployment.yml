@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: comet-deployment
+    namespace: kostas
+    labels:
+        app: comet
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: comet
+    template:
+        metadata:
+            labels:
+                app: comet
+        spec:
+            containers:
+            - name: fiware-comet
+              image: fiware/sth-comet
+              imagePullPolicy: IfNotPresent
+              ports:
+                - containerPort: 8666
+              env:
+                - name: STH_HOST
+                  valueFrom:
+                    secretKeyRef: 
+                        name: comet-secret
+                        key: host
+                - name: STH_PORT
+                  valueFrom:
+                    secretKeyRef: 
+                        name: comet-secret
+                        key: port
+                - name: DB_PREFIX
+                  valueFrom:
+                    secretKeyRef: 
+                        name: comet-secret
+                        key: db_prefix
+                - name: DB_URI
+                  valueFrom:
+                    secretKeyRef: 
+                        name: comet-secret
+                        key: db_uri
+                - name: LOGOPS_LEVEL
+                  valueFrom:
+                    secretKeyRef: 
+                        name: comet-secret
+                        key: logops_level

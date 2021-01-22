@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cygnusproxy
+  namespace: kostas
+spec:
+  selector:
+    app: cygnusproxy
+  clusterIP: 10.48.0.12
+  ports:
+  - protocol: TCP
+    port: 5052
+    targetPort: 5052

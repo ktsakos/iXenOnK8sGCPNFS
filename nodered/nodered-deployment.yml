@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: nodered-deployment
+    namespace: kostas
+    labels:
+        app: mysql
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: nodered
+    template:
+        metadata:
+            labels:
+                app: nodered
+        spec:
+            containers:
+                - name: node-red
+                  image: nodered/node-red:latest
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - containerPort: 1880
+                  env:
+                    - name: TZ
+                      valueFrom:
+                        secretKeyRef: 
+                            name: nodered-secret
+                            key: tz
+                  volumeMounts:
+                    - name: nodered-volume
+                      mountPath: /data
+                      subPath: nodered
+            volumes:
+              - name: nodered-volume
+                persistentVolumeClaim:
+                  claimName: nodered-volume-claim

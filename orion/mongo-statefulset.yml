@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+    name: mongo
+    namespace: kostas
+    labels:
+        app: mongo
+spec:
+    serviceName: "mongo"
+    replicas: 1
+    selector:
+        matchLabels:
+            app: mongo
+    template:
+        metadata:
+            labels:
+                app: mongo
+        spec:
+            containers:
+              - name: mongo
+                image: mongo:3.6
+                imagePullPolicy: IfNotPresent
+                ports:
+                  - containerPort: 27017
+                volumeMounts:
+                  - name: mongo-volume
+                    mountPath: /data/db
+                    subPath: mongo
+    volumeClaimTemplates:
+      - metadata:
+          name: mongo-volume
+        spec:
+          storageClassName: standard
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi

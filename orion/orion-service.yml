@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: orion
+  namespace: kostas
+spec:
+  selector:
+    app: orion
+  clusterIP: 10.48.0.8
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 1026
+    targetPort: 1026
+    nodePort: 32001

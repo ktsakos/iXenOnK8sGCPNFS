@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: queryingsensors
+    namespace: kostas
+    labels:
+        app: queryingsensors
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: queryingsensors
+    template:
+        metadata:
+            labels:
+                app: queryingsensors
+        spec:
+            containers:
+              - name: queryingsensors
+                image: ktsakos/ixenfinal_querying-sensors:latest
+                imagePullPolicy: IfNotPresent
+                ports:
+                 - containerPort: 1024
+                
+                volumeMounts: 
+                   - mountPath: /usr/src/app
+                     name: queryingsensors-volume
+            volumes:
+                - name: queryingsensors-volume
+                  persistentVolumeClaim:
+                    claimName: queryingsensors-volume-claim

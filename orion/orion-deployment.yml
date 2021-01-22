@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: orion
+    namespace: kostas
+    labels:
+        app: orion
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: orion
+    template:
+        metadata:
+            labels:
+                app: orion
+        spec:
+            containers:
+              - name: orion
+                image: fiware/orion:latest
+                imagePullPolicy: IfNotPresent
+                ports:
+                 - containerPort: 1026
+                args: ["-dbhost", "mongo:27017", "-logLevel", "INFO"]
